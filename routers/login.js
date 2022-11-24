@@ -5,8 +5,8 @@ const loginRouter = Router()
 
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-const mongoose = require("mongoose");
-const Usuarios = require("../daos/modelsMDB/schemaUsuarios");
+// const mongoose = require("mongoose");
+const Usuarios = require("../persistencia/modelsMDB/schemaUsuarios");
 
 //const FileStore = require('session-file-store')(session)
 const app = express()
@@ -33,23 +33,42 @@ function createHash(password) {
 
 //fin bcrypt
 
-mongoose
-  .connect("mongodb://localhost:27017/ecommerce")
-  .then(() => console.log("Connected to DB"))
-  .catch((e) => {
-    console.error(e);
-    throw "can not connect to the db";
-  });
+// mongoose
+//   .connect("mongodb://localhost:27017/ecommerce")
+//   .then(() => console.log("Connected to DB"))
+//   .catch((e) => {
+//     console.error(e);
+//     throw "can not connect to the db";
+//   });
 
 
 
+//importar funcion email
 
+
+//mongo db coneccion
+//metiendo mano a mongo atlas
+async function connectMongo(){
+
+
+  const {MONGOURL} = require("../config")
+  const URL = MONGOURL
+  
+  const db = await mongoose.connect(URL,{ 
+    useNewUrlParser: true,
+    useUniFiedTopology: true
+  })
+  
+  .then(db => console.log("conectado a " + db.connection.name))
+  .catch((e) => console.error(e))
+  }
 
 
 
 passport.use(
   "login",
   new LocalStrategy((username, password, done) => {
+    connectMongo()
     Usuarios.findOne({ username }, (err, user) => {
       if (err) return done(err);
 
@@ -83,6 +102,7 @@ passport.use(
       passReqToCallback: true,
     },
     (req, username, password, done) => {
+      connectMongo()
       Usuarios.findOne({ username: username }, function (err, user) {
         if (err) {
           console.log("Error in SignUp: " + err);
@@ -196,10 +216,8 @@ loginRouter.get('/faillogin', (req, res) => {
 })
 
 
-loginRouter.post(
-  "/login",
+loginRouter.post("/login",
   passport.authenticate("login", { successRedirect: '/api/', failureRedirect: "/api/faillogin" }),
- // routes.postLogin
 
 );
 
@@ -221,14 +239,15 @@ loginRouter.get('/failsignup', (req, res) => {
 
 loginRouter.post(
   "/signup",
-  passport.authenticate("/api/signup", { failureRedirect: "/api/failsignup" }),
+  passport.authenticate("signup", { failureRedirect: "/api/failsignup" }),
   //routes.postSignup
 );
 
 
 loginRouter.post('/signup', (req, res) => {
-  const { username, password } = req.user;
-  const user = { username, password };
+  const { username, password, email, phone, address, isAdmin, age  } = req.user;
+  const user = { username, password, email, phone, address, isAdmin, age };
+  console.log(user)
   res.render("pages/profileUser", { user });
 })
 

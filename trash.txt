@@ -8,3 +8,5 @@ artillery quick --count 20 -n 50 "http://localhost:8080/info" > result_consoleLo
 
 git push heroku master
 
+
+http://localhost:8080/public/usuario.jpg

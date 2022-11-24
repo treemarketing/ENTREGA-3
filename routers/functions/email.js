@@ -22,7 +22,7 @@ const mailOptions = {
     from: 'Servidor Node.js',
     to: TEST_MAIL,
     subject: 'Nuevo Registro',
-    html:  `<h1 style="color: blue;"> Mail: ${dat1}, Password: ${dat2}, Nombre: ${dat3}, Edad: ${dat4}, Direccion: ${dat5}, Telefono: ${dat6}, Avatar: ${dat7} </span></h1>`
+    html:  `<h1 style="color: blue;"> Mail: ${user.email}, Password: ${user.password}, Nombre: ${user.name}, Edad: ${user.age}, Direccion: ${user.age}, Telefono: ${user.phone}, Avatar: ${user.avatar} </span></h1>`
  }
  
 async function enviarEmailAdm(){

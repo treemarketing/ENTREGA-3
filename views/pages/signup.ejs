@@ -10,19 +10,113 @@
 
   <%- include('../partials/navbar'); %>
     <h2>Login de Usuario</h2>
-    <form action="/signup" method="post">
-        <div class="mb-3 container text-center">
-          <label for="exampleInputEmail1" class="form-label">Ingresa Tu Nombre</label>
-          <input type="text" class="form-control" id="user" name="username" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3 container text-center">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" name="password">
+     <!-- Nombre-->
+    <form action="/api/signup" method="post">
+  
+      <!-- Nombre-->
+
+<div class="form-group text-center">
+  <label class="col-md-4 control-label">Nombre</label>  
+  <div class="col-sm-5 container mb-2 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="username" placeholder="Nombre de usuario" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
+         <!-- EMAIL-->
+         <div class="form-group text-center">
+          <label class="col-md-4 control-label ">E-Mail</label>  
+            <div class="col-sm-5 container mb-2 inputGroupContainer">
+            <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+          <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+            </div>
           </div>
         </div>
+        <!-- password-->
+        <div class="form-group text-center">
+          <label class="col-md-4 control-label">Contraseña</label>  
+          <div class="col-sm-5 container mb-2 inputGroupContainer">
+          <div class="input-group">
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input  id="inputPassword" name="password" placeholder="Password" class="form-control"  type="password">
+            </div>
+          </div>
+        </div>
+        </div>
+
+     
+<!-- Whatsapp-->
+     
+<div class="form-group text-center">
+<label class="col-md-4 control-label ">Whatsapp</label>  
+  <div class="col-sm-5 container mb-2  inputGroupContainer">
+  <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+<input name="phone" placeholder="(+54)333 3333333" class="form-control" type="text">
+  </div>
+</div>
+</div>
+
+<!-- Adress-->
+    
+<div class="form-group text-center">
+<label class="col-md-4 control-label">Address</label>  
+  <div class="col-sm-5 container mb-2  inputGroupContainer">
+  <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+<input name="address" placeholder="Dirección" class="form-control" type="text">
+  </div>
+</div>
+</div>
+
+
+<!-- Age-->
+    
+<div class="form-group text-center">
+  <label class="col-md-4 control-label">Edad</label>  
+    <div class="col-sm-5 container mb-2  inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="age" placeholder="Edad" class="form-control" type="number">
+    </div>
+  </div>
+  </div>
+
+<!-- Avatar-->
+    
+<div class="form-group text-center">
+<label class="col-md-4 control-label">Avatar</label>  
+  <div class="col-sm-5 container mb-2  inputGroupContainer">
+  <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+<input name="avatar" placeholder="Avatar" class="form-control" type="text" value="http://localhost:8080/public/usuario.jpg">
+  </div>
+</div>
+</div>
+
+<!-- is Admin -->
+<div class="form-group text-center">
+<label class="col-sm-5 container mb-2 control-label">Privilegios Administrador?</label>
+<div class="col-sm-5 container mb-2 ">
+    <div class="radio">
+        <label>
+            <input type="radio" name="isAdmin" value="true" /> Yes
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="isAdmin" value="false" /> No
+        </label>
+    </div>
+</div>
+</div>
+
+
         <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Registrarse</button>
         </div>
       </form>
       <%- include('../partials/footer'); %> 

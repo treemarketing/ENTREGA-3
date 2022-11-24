@@ -102,13 +102,13 @@ server.on("error", error => console.log(`Error en servidor ${error}`))
 
   const cartRouter = require('./routers/carritoFirebase')
   const productsRouter = require('./routers/productosMongo')
-  //const loginRouter = require('./routers/login')
+  const loginRouter = require('./routers/login')
   const infoRouter = require('./routers/info')
   const randomRouter = require('./routers/random')
 
 app.use('/api/productos', productsRouter)
 app.use('/api/carrito', cartRouter)
-//app.use('/api/', loginRouter)
+app.use('/api/', loginRouter)
 app.use('/', infoRouter)
 app.use('/api', randomRouter)
 

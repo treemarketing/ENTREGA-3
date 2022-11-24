@@ -1,6 +1,6 @@
 // const { default: mongoose } = require('mongoose');
 const mongoose = require('mongoose');
-const esquemaProd = require('./modelsMDB/schemaProducto')
+const esquemaProd = require('../persistencia/modelsMDB/schemaProducto')
 
 
   const {MONGOURL} = require("../config")

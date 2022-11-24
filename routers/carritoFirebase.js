@@ -1,4 +1,4 @@
-const Carrito = require('../daos/carritoDaos')
+const Carrito = require('../controllers/carritoDaos')
 
 const express = require('express')
  const { Router } = express

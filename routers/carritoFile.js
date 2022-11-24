@@ -1,4 +1,4 @@
-const Cart = require('../daos/bd/cart.js')
+const Cart = require('../controllers/carritoDaos')
 
 const express = require('express')
  const { Router } = express
