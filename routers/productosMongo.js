@@ -28,7 +28,6 @@ const product = new Producto("product")
 //muestra todos los productos
 productsRouter.get("/", validacion, async (req, res) => {
     await product.getAll().then((respuesta)=>{
-     console.log(respuesta)
     res.json(respuesta)
     }) 
 })

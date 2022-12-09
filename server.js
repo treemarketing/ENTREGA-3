@@ -4,7 +4,13 @@ const app = express()
   // const { Router } = express
   // const router = Router()
 
-
+  app.use((_req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', '*');
+    next();
+  });
+  
 //ENV 
 
 // const dotenv = require('dotenv')
