@@ -1,8 +1,8 @@
-const Products = require('../daos/bd/product')
+const Products = require('../persistencia/bd/product')
 const express = require('express')
 const { Router } = express
 
-const productsRouter = Router()
+const productsRouterFile = Router()
 
 
 
@@ -23,7 +23,7 @@ function validacion (req, res, next) {
 let fecha = new Date()
 const product = new Products ("product")
 //muestra todos los productos
-productsRouter.get("/", validacion, async (req, res) => {
+productsRouterFile.get("/", validacion, async (req, res) => {
     await product.getAll().then((respuesta)=>{
      
     res.json(respuesta)
@@ -34,7 +34,7 @@ productsRouter.get("/", validacion, async (req, res) => {
 
 
 //GET CON ID IDENTIFICADOR EN LA URL TIPO PARAMS
-productsRouter.get('/:id', validacion, async (req, res) => {
+productsRouterFile.get('/:id', validacion, async (req, res) => {
    let { id } = req.params;
    // id = parseInt(id)
    await product.findOne(id).then((respuesta)=>{
@@ -52,7 +52,7 @@ productsRouter.get('/:id', validacion, async (req, res) => {
   
 //me estoy quedando con respuesta del 1 ver como hago para pasar todo 
  
-productsRouter.post('/',validacion, async (req, res) => {
+productsRouterFile.post('/',validacion, async (req, res) => {
    const {body} = req;
          console.log(body)
          let insertBody = {fecha: fecha.toLocaleDateString(), nombre: body.nombre, descripcion: body.descripcion, codigo:body.codigo, foto: body.foto, precio: body.precio, stock: body.stock}
@@ -63,7 +63,7 @@ productsRouter.post('/',validacion, async (req, res) => {
 
 
 //PUT CON ID PARAMS SIEMPRE y BODY!
-productsRouter.put('/:id',validacion, (req, res) => {
+productsRouterFile.put('/:id',validacion, (req, res) => {
    const { id } = req.params;
    const { body } = req;
    const { nombre, descripcion, codigo, foto, precio, stock } = body
@@ -80,7 +80,7 @@ productsRouter.put('/:id',validacion, (req, res) => {
 //ver si tengo que darle cambio en el archivo tambien com
 
  //DELETE CON ID ESCRIBIENDO EN EL ARCHIVO 
- productsRouter.delete('/:id',validacion, (req, res) => {
+ productsRouterFile.delete('/:id',validacion, (req, res) => {
    const { id } = req.params;  
   
    product.delete(id).then((response) => {
@@ -88,4 +88,4 @@ productsRouter.put('/:id',validacion, (req, res) => {
    })
  });
 
- module.exports = productsRouter
+ module.exports = productsRouterFile

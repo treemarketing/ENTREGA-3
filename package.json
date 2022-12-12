@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node benchmark.js",
     "start": "node server.js",
-    "dev": "0x server.js"
+    "dev": "set NODE_ENV=development&& node server.js",
+    "prod": "set NODE_ENV=production&& node server.js"
   },
   "author": "alvaro salomon",
   "license": "ISC",

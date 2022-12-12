@@ -1,9 +1,11 @@
 const express = require('express')
-
 const app = express()
   // const { Router } = express
   // const router = Router()
 
+
+
+  //es similar a utilizar el package cors
   app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
@@ -13,12 +15,16 @@ const app = express()
   
 //ENV 
 
+
+const {TIPO_PERSISTENCIA, PORT, NODE_ENV} = require("./config")
 // const dotenv = require('dotenv')
 // require('dotenv').config()
 
-const PORT = process.env.PORT || 8080
+//termino uso de ENV
 
-// const {MODO, PORT} = require("./config")
+//const PORT = process.env.PORT || 3000
+
+
 
 
 
@@ -63,7 +69,8 @@ app.use('/public', express.static(__dirname + '/public'));
 
 
 const server = app.listen(PORT, () => {
-  console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
+  console.log(`Servidor express escuchando en el puerto ${PORT} (${NODE_ENV} - ${TIPO_PERSISTENCIA})`
+  )
 })
 
 server.on("error", error => console.log(`Error en servidor ${error}`)) 
@@ -104,15 +111,27 @@ server.on("error", error => console.log(`Error en servidor ${error}`))
 
 //RUTAS DE ROUTER CON FILE SYSTEM
   // const cartRouter = require('./routers/carritoFile')
-   //const productsRouter = require('./routers/productosFile')
+   const productsRouterFile = require('./routers/productosFile')
 
-  const cartRouter = require('./routers/carritoFirebase')
+
+
+
   const productsRouter = require('./routers/productosMongo')
+  const cartRouter = require('./routers/carritoFirebase')
   const loginRouter = require('./routers/login')
   const infoRouter = require('./routers/info')
   const randomRouter = require('./routers/random')
 
-app.use('/api/productos', productsRouter)
+  async function persistencia() {
+    if (TIPO_PERSISTENCIA == "FILE"){
+    app.use('/api/productos', productsRouter)
+
+  }else{
+    app.use('/api/productos', productsRouterFile)
+  }
+}
+persistencia()
+
 app.use('/api/carrito', cartRouter)
 app.use('/api/', loginRouter)
 app.use('/', infoRouter)
