@@ -4,7 +4,7 @@ const esquemaProd = require('../persistencia/modelsMDB/schemaProducto')
 
 
   const {MONGOURL} = require("../config")
- const URL = MONGOURL
+ 
 
 
 
@@ -15,7 +15,7 @@ class Producto{
             
            //const URL = "mongodb+srv://salo:tako@cluster0.51jwcs4.mongodb.net/test"
            //let rta = await mongoose.createconection(URL, {
-            let rta = await mongoose.connect(URL, {
+            let rta = await mongoose.connect(MONGOURL, {
             useNewUrlParser: true,
             useUniFiedTopology: true
         })
@@ -32,6 +32,7 @@ async save(producto){
          producto.fecha = tiempo.toString()
          
         await esquemaProd.create(producto)
+
         const id = producto.idP
         console.log(id)
         mongoose.disconnect()

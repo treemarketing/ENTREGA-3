@@ -1,18 +1,20 @@
 
+const dotenv = require('dotenv')
 const path = require('path')
 
 console.log(process.env.NODE_ENV + ".env");
 
 
-require('dotenv').config({
+dotenv.config({
   path: path.resolve(process.cwd(), process.env.NODE_ENV + ".env"),
 })
 
+//si esta solo .env
+// dotenv.config()
 
 
-
-
-const MONGOURL= process.env.MONGOURL
+//  const MONGOURL= process.env.MONGOURL
+// console.log(MONGOURL)
 
 // module.exports = {
 //     //HOST: process.env.HOST || "127.0.0.1",
@@ -30,25 +32,29 @@ const MONGOURL= process.env.MONGOURL
   //    MODO: 'FORK' 
   //  })
 
-  // .argv
+  //  .argv
   
 
 
 
 
-  // const PORT = args.PORT
+  //  const PORT = args.PORT
   // const MODO = args.MODO
 
 
 
-   //module.exports = { PORT, MONGOURL, MODO }
+   module.exports = { MONGOURL: process.env.MONGOURL,
+    NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
+    TIPO_PERSISTENCIA: process.env.TIPO_PERSISTENCIA,
+   }
 
 
-  module.exports = {
-    NODE_ENV: process.env.NODE_ENV || "production",
-    HOST: process.env.HOST || "localhost",
-    PORT: process.env.PORT || 8080,
-    //FILE - MONGO
-    TIPO_PERSISTENCIA: process.env.TIPO_PERSISTENCIA || "MONGO",
-    MONGOURL: process.env.MONGOURL 
-  }
+  // module.exports = {
+  //   NODE_ENV: process.env.NODE_ENV || "production",
+  //   HOST: process.env.HOST || "localhost",
+  //   PORT: process.env.PORT || 8080,
+  //   //FILE - MONGO
+  //   TIPO_PERSISTENCIA: process.env.TIPO_PERSISTENCIA || "MONGO",
+  //   MONGOURL
+  // }

@@ -10,18 +10,20 @@ function App() {
 
   const [productos, setProductos] = useState([]);
   const [id, setId] = useState("");
+  const [idP, setIdP] = useState("");
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [precio, setPrecio] = useState("");
   const [stock, setStock] = useState("");
   const [foto, setFoto] = useState("");
  
-  function cargarProductos() {
-    fetch(ENDPOINT_PRODUCTOS)
+   function cargarProductos() {
+     fetch(ENDPOINT_PRODUCTOS)
     .then((response) => response.json())
     .then((json) => setProductos(json))
 
   }
+  
   useEffect(() => {
     cargarProductos();
       //ver .que hay que devolverlo
@@ -43,12 +45,54 @@ function App() {
 
 
   function handleNuevo(_id){
-   alert(JSON.stringify)
+var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+   let raw = JSON.stringify({ nombre, descripcion, precio, stock, foto, idP})
+   let requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+
+  fetch(ENDPOINT_PRODUCTOS, requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    cargarProductos()
+    .catch(error => console.log('error', error));
   }
 
 
-  function handleEditar(){
+  function handleSetProperties(prod){
+    setId(prod._id)
+    setIdP(prod.idP)
+setNombre(prod.nombre)
+setDescripcion(prod.descripcion)
+setPrecio(prod.precio)
+setStock(prod.stock)
+setFoto(prod.foto)
+  }
 
+  function handleEditar(){
+ 
+   var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+let raw = JSON.stringify({ nombre, descripcion, precio, stock, foto, idP});
+
+let requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch(ENDPOINT_PRODUCTOS + id, requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+  cargarProductos()
   }
 
 
@@ -69,6 +113,7 @@ function App() {
   }}>
   <CardBody>
   <CardImg style ={{width: "10%", align:"center"}}  src={ prod.foto} alt="foto"/>
+    <CardText as="h5">id Producto { prod.idP }</CardText>
   <CardTitle as="h5">Nombre: { prod.nombre}</CardTitle>
     <CardText as="h5">{ prod.descripcion }</CardText>
     <CardText as="h5">Precio: $ { prod.precio }</CardText>
@@ -82,13 +127,19 @@ function App() {
 <hr />
   <Button size="lg" onClick={()=> handleBorrar(prod._id)}> borrar </Button> 
   
-  <Button size="lg" onClick={handleEditar}> Editar </Button> 
+  <Button size="lg" onClick={()=> handleSetProperties(prod)}> Editar </Button> 
       </div>
       ))}
 
       
          <div>
         {id ? "EDITANDO " + id : "INGRESE UNO NUEVO"}
+        <br />
+        <input
+          value={idP}
+          onChange={(e) => setIdP(e.target.value)}
+          placeholder="id Producto"
+        />
         <br />
         <input
           value={nombre}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 
     <title>Document</title>
     <%- include('../partials/head'); %>
@@ -9,7 +11,7 @@
 
 
   <%- include('../partials/navbar'); %>
-    <h2>Login de Usuario</h2>
+    <h2>Registro de Usuario</h2>
      <!-- Nombre-->
     <form action="/api/signup" method="post">
   
@@ -50,12 +52,10 @@
      
 <!-- Whatsapp-->
      
-<div class="form-group text-center">
+<div class="container text-center">
 <label class="col-md-4 control-label ">Whatsapp</label>  
-  <div class="col-sm-5 container mb-2  inputGroupContainer">
-  <div class="input-group">
-      <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-<input name="phone" placeholder="(+54)333 3333333" class="form-control" type="text">
+  <div class="col-xl-4 container mb-2  ">
+<input name="phone" placeholder="(+54)333 3333333" class="form-control"  id="inputPhone" type="text">
   </div>
 </div>
 </div>
@@ -63,11 +63,11 @@
 <!-- Adress-->
     
 <div class="form-group text-center">
-<label class="col-md-4 control-label">Address</label>  
+<label class="col-md-4 control-label">Direción</label>  
   <div class="col-sm-5 container mb-2  inputGroupContainer">
   <div class="input-group">
       <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-<input name="address" placeholder="Dirección" class="form-control" type="text">
+<input name="address" placeholder="Dirección" class="form-control"  type="text">
   </div>
 </div>
 </div>
@@ -122,3 +122,12 @@
       <%- include('../partials/footer'); %> 
 </body>
 </html>
+
+
+<script>
+  const phoneInputField = document.querySelector("#inputPhone")
+  const phoneInput = window.intlTelInput(phoneInputField, {
+    utilsScript:
+      "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+  })
+</script>

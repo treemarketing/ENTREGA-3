@@ -7,7 +7,7 @@
     "test": "node benchmark.js",
     "start": "node server.js",
     "dev": "set NODE_ENV=development&& node server.js",
-    "prod": "set NODE_ENV=production&& node server.js"
+    "prod": "set NODE_ENV=production&& nodemon server.js"
   },
   "author": "alvaro salomon",
   "license": "ISC",
@@ -28,6 +28,7 @@
     "passport-local": "^1.0.0",
     "react-bootstrap": "^2.7.0",
     "session-file-store": "^1.5.0",
+    "socket.io": "^4.5.4",
     "twilio": "^3.83.3",
     "winston": "^3.8.2",
     "yargs": "^17.6.0"

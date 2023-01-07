@@ -66,7 +66,7 @@ cartRouter.post('/:idC/productos', (req, res) => {
   const { body } = req;
   const { nombre, descripcion, codigo, foto, precio, stock } = body
   const insertProducts = { idP: body.idP, nombre, descripcion, codigo, foto, precio, stock };
-  //  const {fecha, nombre, descripcion, codigo, foto, precio, stock } = req.body
+
 
 
   cart.agregarProducto(idC, insertProducts).then((response) =>{

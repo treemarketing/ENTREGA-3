@@ -5,7 +5,7 @@ const loginRouter = Router()
 
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
-// const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 const Usuarios = require("../persistencia/modelsMDB/schemaUsuarios");
 
 //const FileStore = require('session-file-store')(session)
@@ -44,8 +44,14 @@ function createHash(password) {
 
 
 //importar funcion email
+const {MONGOURL} = require("../config")
+const URL = MONGOURL
+console.log(URL)
 
 
+
+  // const { PORT, MONGOURI} = require("../config")
+  console.log(MONGOURL)
 //mongo db coneccion
 //metiendo mano a mongo atlas
 async function connectMongo(){
@@ -53,7 +59,6 @@ async function connectMongo(){
 
   const {MONGOURL} = require("../config")
   const URL = MONGOURL
-  
   const db = await mongoose.connect(URL,{ 
     useNewUrlParser: true,
     useUniFiedTopology: true

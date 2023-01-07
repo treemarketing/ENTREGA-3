@@ -1,23 +1,14 @@
 const express = require('express')
 const Producto = require('../controllers/productoDaos')
-//const {productoDaos: Producto} = require('../daos/mainDaos')
-const { Router } = express
-
-const productsRouter = express.Router()
 
 
 
+const mensajesRouter = express.Router()
 
 
-function validacion (req, res, next) {
-      let admin = true;
-      if(!admin){
-        return res.status(403).send({error: "acceso no autorizado"})
-        }else{
-          console.log("acceso autorizado")
-          return next();
-        }
-       }
+
+
+
 
 
 
@@ -26,7 +17,7 @@ const product = new Producto("product")
 
 
 //muestra todos los productos
-productsRouter.get("/", validacion, (req, res) => {
+mensajes.get("/", validacion, (req, res) => {
      product.getAll().then((respuesta)=>{
     res.json(respuesta)
     }) 
@@ -34,7 +25,7 @@ productsRouter.get("/", validacion, (req, res) => {
 
 
 //GET CON ID IDENTIFICADOR EN LA URL TIPO PARAMS
-productsRouter.get('/:id', validacion, async (req, res) => {
+mensajesRouter.get('/:id', validacion, async (req, res) => {
    let { id } = req.params;
    await product.getById(id).then((respuesta)=>{
      const encontrar = respuesta
